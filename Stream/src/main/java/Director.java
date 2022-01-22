@@ -1,6 +1,6 @@
 public class Director {
 
-    public void doWork(Worker worker){
-        worker.work();
+    public String doWork(Worker worker, int count){
+        return worker.work(count);
     }
 }

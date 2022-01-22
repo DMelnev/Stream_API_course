@@ -9,7 +9,11 @@ public class Main {
         }).start();
 
         Director director = new Director();
-        director.doWork(() -> System.out.println("Im working"));
+        String result = director.doWork((n) -> {
+            for (int i = 0; i < n; i++) System.out.println("I'm working");
+            return "Success";
+        }, 10);
+        System.out.println(result);
     }
 
 }
