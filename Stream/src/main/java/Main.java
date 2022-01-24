@@ -1,6 +1,7 @@
 import java.awt.image.AreaAveragingScaleFilter;
 import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -71,7 +72,7 @@ public class Main {
 //                .noneMatch((user -> user.getAge() <= 18));
 
         users.stream()
-                .sorted((c1, c2) -> String.CASE_INSENSITIVE_ORDER.compare(c1.getName(), c2.getName()))
+                .sorted(Comparator.comparing(User::getName))
                 .filter((usr) -> usr.getAge() < 40)
                 .limit(3)
                 .map(User::getName)
