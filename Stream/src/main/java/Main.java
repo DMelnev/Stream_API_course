@@ -3,14 +3,12 @@ import org.w3c.dom.ls.LSOutput;
 import javax.swing.text.html.Option;
 import java.awt.image.AreaAveragingScaleFilter;
 import java.sql.Array;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
@@ -83,15 +81,30 @@ public class Main {
 //                .forEach(System.out::println);
 
 
-        Optional<User> oldest = users.stream()
-                .filter(n -> n.getAge() < 8)
-//                .max(Comparator.comparing(User::getName))
-                .max((o1, o2) -> Integer.compare(o1.getAge(), o2.getAge()));
-        oldest.ifPresent(System.out::println);
-        oldest.ifPresentOrElse(System.out::println, () -> System.out.println("User not found"));
-//        if (oldest.isPresent())
-//        System.out.println(oldest.get().getName());
+//        Optional<User> oldest = users.stream()
+//                .filter(n -> n.getAge() < 8)
+////                .max(Comparator.comparing(User::getName))
+//                .max((o1, o2) -> Integer.compare(o1.getAge(), o2.getAge()));
+//        oldest.ifPresent(System.out::println);
+//        oldest.ifPresentOrElse(System.out::println, () -> System.out.println("User not found"));
+////        if (oldest.isPresent())
+////        System.out.println(oldest.get().getName());
+//
+////        Optional<User> result = users.stream()
+//        users.stream()
+//                .filter((user) -> user.getName().toLowerCase(Locale.ROOT).contains("a"))
+//                .findAny()
+//                .ifPresentOrElse(System.out::println, () -> System.out.println("not find"));
 
+//        result.ifPresentOrElse(System.out::println, () -> System.out.println("User not find"));
+        int[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
+        Arrays.stream(array)
+                .filter((o1) -> o1 > 5)
+                .sorted()
+                .forEach(System.out::println);
+
+        Stream.of(array)
+                .forEach(System.out::println);
     }
 
 //    private static List<String> map(List<Integer> numbers) {
