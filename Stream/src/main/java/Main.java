@@ -1,8 +1,10 @@
+import javax.swing.text.html.Option;
 import java.awt.image.AreaAveragingScaleFilter;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -71,13 +73,21 @@ public class Main {
 //        boolean result = users.stream()
 //                .noneMatch((user -> user.getAge() <= 18));
 
-        users.stream()
-                .sorted(Comparator.comparing(User::getName))
-                .filter((usr) -> usr.getAge() < 40)
-                .limit(3)
-                .map(User::getName)
-                .forEach(System.out::println);
+//        users.stream()
+//                .sorted(Comparator.comparing(User::getName))
+//                .filter((usr) -> usr.getAge() < 40)
+//                .limit(3)
+//                .map(User::getName)
+//                .forEach(System.out::println);
 
+
+        Optional<User> oldest = users.stream()
+                .filter(n -> n.getAge() < 34)
+//                .max(Comparator.comparing(User::getName))
+                .max((o1, o2) -> Integer.compare(o1.getAge(), o2.getAge()));
+//        oldest.ifPresent(user -> System.out.println(user.getName()));
+        if (oldest.isPresent())
+        System.out.println(oldest.get().getName());
 
     }
 
