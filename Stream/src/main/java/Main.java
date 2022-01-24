@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 import javax.swing.text.html.Option;
 import java.awt.image.AreaAveragingScaleFilter;
 import java.sql.Array;
@@ -82,12 +84,13 @@ public class Main {
 
 
         Optional<User> oldest = users.stream()
-                .filter(n -> n.getAge() < 34)
+                .filter(n -> n.getAge() < 8)
 //                .max(Comparator.comparing(User::getName))
                 .max((o1, o2) -> Integer.compare(o1.getAge(), o2.getAge()));
-//        oldest.ifPresent(user -> System.out.println(user.getName()));
-        if (oldest.isPresent())
-        System.out.println(oldest.get().getName());
+        oldest.ifPresent(System.out::println);
+        oldest.ifPresentOrElse(System.out::println, () -> System.out.println("User not found"));
+//        if (oldest.isPresent())
+//        System.out.println(oldest.get().getName());
 
     }
 
