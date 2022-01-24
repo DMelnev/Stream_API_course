@@ -2,6 +2,7 @@ import java.awt.image.AreaAveragingScaleFilter;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -21,37 +22,61 @@ public class Main {
 //            for (int i = 0; i < n; i++) System.out.println("I'm working");
 //            return "Success";
 //        }, 10);
-//        System.out.println(result);
-
-        ArrayList<Integer> numbers = new ArrayList<>();
-        for (int i = 0; i < 1000; i++) {
-            numbers.add((int) ((Math.random() * 100) + 100));
-        }
-//        List<Integer> filtered = filter(numbers, (a) -> a % 10 == 0);
-//        List<String> mapped = map(filtered);
-
-
-//        List<Integer> filtered = numbers.stream().filter((n) -> n % 10 == 0).map(new Function<Integer, String>() {
-//            @Override
-//            public String apply(Integer integer) {
-//                return "Number: " + integer;
-//            }
-//        })
+////        System.out.println(result);
+//
+//        ArrayList<Integer> numbers = new ArrayList<>();
+//        for (int i = 0; i < 1000; i++) {
+//            numbers.add((int) ((Math.random() * 100) + 100));
+//        }
+////        List<Integer> filtered = filter(numbers, (a) -> a % 10 == 0);
+////        List<String> mapped = map(filtered);
+//
+//
+////        List<Integer> filtered = numbers.stream().filter((n) -> n % 10 == 0).map(new Function<Integer, String>() {
+////            @Override
+////            public String apply(Integer integer) {
+////                return "Number: " + integer;
+////            }
+////        })
+////        List<String> list = numbers.stream()
+////                .filter((n) -> n % 2 == 0)
+////                .map(((n) -> "Number: " + n))
+////                .filter((string) -> string.endsWith("0"))
+////                .map((string) -> string + " !").collect(Collectors.toList());
+//
 //        List<String> list = numbers.stream()
-//                .filter((n) -> n % 2 == 0)
-//                .map(((n) -> "Number: " + n))
-//                .filter((string) -> string.endsWith("0"))
-//                .map((string) -> string + " !").collect(Collectors.toList());
+//                .filter((integer -> (integer % 2 == 0)&&(integer % 5 == 0) ))
+//                .map(Math::sqrt)
+//                .map((d)-> "Корень: "+d)
+//                .collect(Collectors.toList());
+//
+//        for (String i : list) {
+//            System.out.println(i);
+//        }
 
-        List<String> list = numbers.stream()
-                .filter((integer -> (integer % 2 == 0)&&(integer % 5 == 0) ))
-                .map(Math::sqrt)
-                .map((d)-> "Корень: "+d)
-                .collect(Collectors.toList());
+        ArrayList<User> users = new ArrayList<>();
+        users.add(new User("Alex", 35));
+        users.add(new User("Max", 22));
+        users.add(new User("John", 17));
+        users.add(new User("Andrew", 33));
+        users.add(new User("Jack", 44));
+        users.add(new User("Nick", 80));
+        users.add(new User("Alice", 46));
+        users.add(new User("Helen", 11));
+        users.add(new User("Pavel", 19));
+        users.add(new User("Sancho", 32));
+        users.add(new User("Poncho", 43));
 
-        for (String i : list) {
-            System.out.println(i);
-        }
+//        boolean result = users.stream()
+//                .noneMatch((user -> user.getAge() <= 18));
+
+        users.stream()
+                .sorted((c1, c2) -> String.CASE_INSENSITIVE_ORDER.compare(c1.getName(), c2.getName()))
+                .filter((usr) -> usr.getAge() < 40)
+                .limit(3)
+                .map(User::getName)
+                .forEach(System.out::println);
+
 
     }
 
